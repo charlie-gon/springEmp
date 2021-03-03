@@ -28,6 +28,8 @@ public class EmpVO {
 	private String commission_pct;
 	private String manager_id;
 	private String department_id;
+	private String department_name;
+	private String job_title;
 	
 	
 }

@@ -28,10 +28,10 @@
 	<Logger name="jdbc.sqltiming" level="INFO" additivity="false">
 		<AppenderRef ref="console_com" />
 	</Logger>
-	<Logger name="egovframework" level="INFO" additivity="false">
+	<Logger name="egovframework" level="debug" additivity="false">
 		<AppenderRef ref="console_com" />
 	</Logger>
-	<Logger name="com" level="INFO" additivity="false">
+	<Logger name="com" level="debug" additivity="false">
 		<AppenderRef ref="console_com" />
 	</Logger>
 	<Logger name="org.springframework" level="debug"

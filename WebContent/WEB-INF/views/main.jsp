@@ -8,6 +8,7 @@
 </head>
 <body>
 <h3>메인 페이지</h3>
-<img src="./resources/images/welsh.jpg">
+<img src="/resources/images/welsh.jpg">
+<a href="getSearchEmp">사원 조회</a>
 </body>
 </html>

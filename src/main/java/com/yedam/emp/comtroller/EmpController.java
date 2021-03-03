@@ -32,7 +32,8 @@ public class EmpController {
 	}
 	
 	@GetMapping("/updateEmp") // 수정 페이지 이동
-	public String updateEmp(EmpVO vo) {
+	public String updateEmp(EmpVO vo, Model model) {
+		model.addAttribute("empVo", empService.getEmp(vo));
 		return "/emp/updateEmp";
 	}
 	
@@ -42,8 +43,15 @@ public class EmpController {
 		return "redirect:getSearchEmp";
 	}
 	
-	@PostMapping("/getEmp") // 단건 조회
-	public String getEmp(EmpVO vo) {
+	@GetMapping("/deleteEmp") // 삭제 처리
+	public String deleteEmp(EmpVO vo) {
+		empService.deleteEmp(vo);
+		return "redirect:getSearchEmp";
+	}
+	
+	@GetMapping("/getEmp") // 단건 조회
+	public String getEmp(EmpVO vo, Model model) {
+		model.addAttribute("emp", empService.getEmp(vo));
 		return "emp/getEmp";
 	}
 	

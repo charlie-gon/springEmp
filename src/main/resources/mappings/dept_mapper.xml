@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.emp.service.impl.DeptMapper">
+	<select id="getSearchDept" parameterType="dept" resultType="dept">
+		SELECT * FROM DEPARTMENTS
+	</select>
+	<select id="getDept" parameterType="dept" resultType="dept">
+		SELECT
+		DEPARTMENT_ID,
+		DEPARTMENT_NAME,
+		MANAGER_ID,
+		LOCATION_ID
+		FROM DEPARTMENTS
+		WHERE DEPARTMENT_ID = #{DEPARTMENT_ID}
+		<where>
+			<if test="department_name != null and department_name != ''">
+				DEPARTMENT_NAME = #{DEPARTMENT_NAME}
+			</if>
+		</where>
+	</select>
+</mapper>

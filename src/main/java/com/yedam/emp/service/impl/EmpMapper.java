@@ -1,11 +1,10 @@
-package com.yedam.emp.service;
+package com.yedam.emp.service.impl;
 
 import java.util.List;
 
 import com.yedam.emp.EmpVO;
 
-public interface EmpService {
-
+public interface EmpMapper {
 	// 등록
 	public int insertEmp(EmpVO vo);
 
