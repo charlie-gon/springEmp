@@ -8,14 +8,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
+		// 상품추가
 		$('#addPr').on('click', function(){
-			$("tr:last").clone().appendTo($("tbody"));
+				$("tr:last").clone().appendTo($("tbody"));
+ 				var trCnt = $('tr').index();
+				var plus_num = parseInt(trCnt)+1;
+				$('input').attr('name',plus_num);
+				$('input').attr('name','ords[].cnt');
+				
+			
+			
 		});
+		// 상품취소
 		$('#cancelPr').on('click', function(){
-			$("tr:last").remove();
+			if($('table tr').length < 4)return alert("모든 상품을 취소하셨습니다.");
+			$('table tr:last').remove();
 		});
-		$('table tr').eq(i).children().find('input[name="ords[0].no"]').val();
-		
+			
 		
 	});
 </script>
