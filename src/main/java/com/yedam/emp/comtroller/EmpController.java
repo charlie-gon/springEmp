@@ -1,11 +1,16 @@
 package com.yedam.emp.comtroller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yedam.emp.EmpSearchVO;
 import com.yedam.emp.EmpVO;
@@ -58,8 +63,21 @@ public class EmpController {
 		return "redirect:getSearchEmp";
 	}
 	
-	@GetMapping("/getEmp") // 단건 조회
-	public String getEmp(EmpVO vo, Model model) {
+	@GetMapping("/getEmp") // 단건 조회 //PathVariable = /getEmp/{id}
+	public String getEmp(Model model
+			//, HttpServletRequest request
+			//, @RequestParam("id") String employee_id // 변수값 employee_id 대신 "id" 사용으로 설정
+			//, @RequestParam(value="id", required=false ,defaultValue="100") String employee_id // id 없으면 초기값으로 100 주겠다(교재 p.276)
+			//, @PathVariable String id // 교재 p.396(PathVariable)
+			, @ModelAttribute("employee")EmpVO vo // 교재 p.286
+			) {
+		// 요청 파라미터 접근(교재 p.274)
+		// 1. getParameter - 옛날 방식
+//		String employee_id = request.getParameter("employee_id");
+//		vo.setEmployee_id(employee_id);
+		
+//		EmpVO vo = new EmpVO();
+//		vo.setEmployee_id(id);
 		model.addAttribute("emp", empService.getEmp(vo));
 		return "emp/getEmp";
 	}

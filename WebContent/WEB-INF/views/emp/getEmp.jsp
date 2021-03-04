@@ -19,6 +19,10 @@
 </script>
 </head>
 <body>
+파라미터(커맨드 객체는 따로 저장하지 않아도 자동으로 저장됨(앞자리 소문자로)) 
+<br>
+${empVO }
+<hr>
 <div class="divCenter">
 <h3>사원 단건 조회 페이지</h3>
 <p>사번: ${emp.employee_id }</p>

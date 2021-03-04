@@ -3,23 +3,52 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yedam.emp.service.impl.DeptMapper">
-	<select id="getSearchDept" parameterType="dept"
-		resultType="dept">
-		SELECT *
-		FROM DEPARTMENTS
-		ORDER BY DEPARTMENT_ID
+
+	<!-- 레코드 껀수 -->
+	<select id="getCount" resultType="int">
+	SELECT COUNT(*) 
+	FROM EMPLOYEES E, DEPARTMENTS D, LOCATIONS L
+	WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+	AND(D.LOCATION_ID = L.LOCATION_ID)
+	<if test="last_name != null and last_name != ''">
+		AND E.LAST_NAME = #{last_name}
+	</if>
+	<if test="department_name != null and department_name != ''">
+		AND D.DEPARTMENT_NAME = #{department_name}
+	</if>
+	<if test="city != null and city != ''">
+		AND L.CITY = #{city}
+	</if>
+	ORDER BY E.LAST_NAME
+	</select>
+	<select id="getSearchDept" parameterType="deptSearchVO" resultType="dept">
+	select b.* from(select rownum rn, a.*from(
+	
+		SELECT 
+		E.LAST_NAME, 
+		D.DEPARTMENT_NAME, 
+		L.CITY
+		FROM EMPLOYEES E
+		FULL OUTER JOIN DEPARTMENTS D
+		ON(E.DEPARTMENT_ID = D.DEPARTMENT_ID)
+		FULL OUTER JOIN LOCATIONS L
+		ON(D.LOCATION_ID = L.LOCATION_ID)
 		<where>
-			<if test="department_name != null and department_name = ''">
-				DEPARTMENT_NAME = #{department_name}
+			<if test="last_name != null and last_name != ''">
+				AND E.LAST_NAME = #{last_name}
 			</if>
-			<if test="manager_id != null and manager_id = ''">
-				AND MANAGER_ID = #{manager_id}
+			<if test="department_name != null and department_name != ''">
+				AND D.DEPARTMENT_NAME = #{department_name}
+			</if>
+			<if test="city != null and city != ''">
+				AND L.CITY = #{city}
 			</if>
 		</where>
+	  )a )b where rn between #{start} and #{end}
 	</select>
 	
 	<select id="getDept" parameterType="dept" resultType="dept">
-		SELECT E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY
+		SELECT E.LAST_NAME, D.DEPARTMENT_NAME, D.MANAGER_ID, L.CITY
 		FROM EMPLOYEES E
 		FULL OUTER JOIN DEPARTMENTS D
 		ON(E.DEPARTMENT_ID = D.DEPARTMENT_ID)
