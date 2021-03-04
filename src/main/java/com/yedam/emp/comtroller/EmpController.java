@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yedam.emp.EmpSearchVO;
 import com.yedam.emp.EmpVO;
+import com.yedam.emp.common.Paging;
 import com.yedam.emp.service.EmpService;
 
 @Controller
@@ -56,7 +58,19 @@ public class EmpController {
 	}
 	
 	@GetMapping("/getSearchEmp") // 검색 조회
-	public String getSearchEmp(EmpVO vo, Model model) {
+	public String getSearchEmp(EmpSearchVO vo, Paging paging ,Model model) {
+		paging.setPageUnit(3); // 한 페이지에 표시되는 레코드 건수
+		paging.setPageSize(3); // 페이지 번호
+		// 페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1); // 페이지 넘어오지 않으면 1로 세팅
+		}
+		
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		paging.setTotalRecord(empService.getCount(vo));
+		//model.addAttribute("empSearchVO", vo); // 따로 설정 해주지 않아도 자동 생성 된다
+		model.addAttribute("paging", paging);
 		model.addAttribute("list", empService.getSearchEmp(vo));
 		return "emp/getSearchEmp";
 	}

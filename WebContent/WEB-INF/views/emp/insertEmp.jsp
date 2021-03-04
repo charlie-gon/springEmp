@@ -10,6 +10,11 @@
 <body>
 <h3>사원 등록</h3>
 <form action="insertEmp" method="post" name="frm">
+
+	employee_id
+	<input name="employee_id">
+	<br> 
+
 	first_name
 	<input name="first_name">
 	<br> 
@@ -22,10 +27,6 @@
 	<input type="email" name="email">
 	<button type="button" id="btnEmail">중복체크</button>
 	<span id="emailResult"></span>
-	<br> 
-	
-	phone_number
-	<input type="text" name="phone_number">
 	<br> 
 	
 	hire_date

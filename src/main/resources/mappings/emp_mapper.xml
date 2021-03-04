@@ -3,20 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yedam.emp.service.impl.EmpMapper">
-	<select id="getSearchEmp" parameterType="emp" resultType="emp" >
-	<!-- https://gent.tistory.com/307 -->
-		SELECT
-		E.EMPLOYEE_ID,
-		E.LAST_NAME,
-		E.EMAIL,
-		E.SALARY,
-		D.DEPARTMENT_ID,
-		D.DEPARTMENT_NAME,
-		J.JOB_TITLE
-		FROM EMPLOYEES E,DEPARTMENTS D, JOBS J 
-		WHERE E.DEPARTMENT_ID= D.DEPARTMENT_ID
-   		AND (E.JOB_ID = J.JOB_ID)
-		<!-- 참고: https://mybatis.org/mybatis-3/ko/dynamic-sql.html -->
+
+	<!-- 레코드건수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*) FROM EMPLOYEES
 		<where>
 			<if test="department_id != null and department_id != ''">
 				DEPARTMENT_ID = #{department_id}
@@ -29,6 +19,36 @@
 				AND upper(FIRST_NAME) LIKE '%' || upper(#{first_name}) || '%'
 			</if>
 		</where>	
+	</select>
+	<select id="getSearchEmp" parameterType="empSearchVO" resultType="emp" >
+	<!-- https://gent.tistory.com/307 -->
+	select b.* from(select rownum rn, a.*from(
+	
+		SELECT
+			E.EMPLOYEE_ID,
+			E.LAST_NAME,
+			E.EMAIL,
+			E.SALARY,
+			D.DEPARTMENT_ID,
+			D.DEPARTMENT_NAME,
+			J.JOB_TITLE
+		FROM EMPLOYEES E,DEPARTMENTS D, JOBS J 
+		WHERE E.DEPARTMENT_ID= D.DEPARTMENT_ID
+   		AND (E.JOB_ID = J.JOB_ID)
+		<!-- 참고: https://mybatis.org/mybatis-3/ko/dynamic-sql.html -->
+			<if test="department_id != null and department_id != ''">
+				AND D.DEPARTMENT_ID = #{department_id}
+			</if>
+			<!-- 앞서 정의된 if문과 연결시키려면 AND~ 삽입 필요 -->
+			<if test="job_id != null and job_id != ''">
+				AND J.JOB_ID = #{job_id} 
+			</if>
+			<if test="first_name != null and first_name != ''">
+				AND upper(FIRST_NAME) LIKE '%' || upper(#{first_name}) || '%'
+			</if>
+		ORDER BY E.EMPLOYEE_ID
+		
+		  )a )b where rn between #{start} and #{end}
 	</select>
 	<insert id="insertEmp" parameterType="emp">
 		INSERT INTO EMPLOYEES 
