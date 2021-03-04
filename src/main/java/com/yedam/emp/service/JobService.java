@@ -1,10 +1,10 @@
-package com.yedam.emp.service.impl;
+package com.yedam.emp.service;
 
 import java.util.List;
 
 import com.yedam.emp.JobVO;
 
-public interface JobMapper {
+public interface JobService {
 	// 등록
 	public int insertJob(JobVO vo);
 
@@ -19,4 +19,6 @@ public interface JobMapper {
 
 	// 전체&검색 조회
 	public List<JobVO> getSearchJob(JobVO vo);
+
+	// 전체 껀수
 }

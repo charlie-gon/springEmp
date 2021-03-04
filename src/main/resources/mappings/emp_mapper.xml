@@ -52,13 +52,15 @@
 	</select>
 	<insert id="insertEmp" parameterType="emp">
 		INSERT INTO EMPLOYEES 
-		(EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, HIRE_DATE,JOB_ID)
+		(EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, HIRE_DATE,JOB_ID, DEPARTMENT_ID)
 		VALUES( #{employee_id}, 
 				#{first_name}, 
 				#{last_name}, 
 				#{email},
 				#{hire_date},
-				#{job_id} )
+				#{job_id},
+				#{department_id}
+				 )
 	</insert>
 	<update id="updateEmp" parameterType="emp">
 		UPDATE 

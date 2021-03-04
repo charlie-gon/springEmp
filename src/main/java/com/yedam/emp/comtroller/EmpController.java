@@ -12,15 +12,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yedam.emp.DeptSearchVO;
+import com.yedam.emp.DeptVO;
 import com.yedam.emp.EmpSearchVO;
 import com.yedam.emp.EmpVO;
+import com.yedam.emp.JobVO;
 import com.yedam.emp.common.Paging;
+import com.yedam.emp.service.DeptService;
 import com.yedam.emp.service.EmpService;
+import com.yedam.emp.service.JobService;
 
 @Controller
 public class EmpController {
 	
 	@Autowired EmpService empService;
+	@Autowired DeptService deptService;
+	@Autowired JobService jobService;
 	/** 
 	 * 분명 @Service로 등록한 클래스는 EmpServiceImpl 인데, 
 	 * EmpService 클래스를 호출하는 이유는?
@@ -35,7 +42,9 @@ public class EmpController {
 	}
 	
 	@GetMapping("/insertEmp") // 등록 페이지 이동
-	public String insertEmp(EmpVO vo) {
+	public String insertEmp(EmpVO vo, Model model, DeptSearchVO deptVo, JobVO jobVo) {
+		model.addAttribute("deptList", deptService.getSearchDept(deptVo));
+		model.addAttribute("jobList", jobService.getSearchJob(jobVo));
 		return "/emp/insertEmp";
 	}
 	
