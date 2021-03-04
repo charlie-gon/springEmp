@@ -16,6 +16,13 @@ import com.yedam.emp.service.EmpService;
 public class EmpController {
 	
 	@Autowired EmpService empService;
+	/** 
+	 * 분명 @Service로 등록한 클래스는 EmpServiceImpl 인데, 
+	 * EmpService 클래스를 호출하는 이유는?
+	 * - EmpServiceImpl은 EmpService 인터페이스의 구현체에 불과하다.
+	 * 	 따라서 EmpService 등록 시 해당 클래스를 상속한 클래스는 자동으로 등록된다.
+	 * 
+	 */
 	
 	@RequestMapping("/")
 	public String main() { // 뷰 페이지 설정 / 리턴값은 항상 String 

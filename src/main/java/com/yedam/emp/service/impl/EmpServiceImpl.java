@@ -10,7 +10,7 @@ import com.yedam.emp.EmpSearchVO;
 import com.yedam.emp.EmpVO;
 import com.yedam.emp.service.EmpService;
 
-@Service
+@Service // 이 클래스가 Service 역할을 수행한다는 것을 알려주는 Annotation!
 public class EmpServiceImpl implements EmpService {
 	
 	//@Autowired EmpSpringDAO dao;
