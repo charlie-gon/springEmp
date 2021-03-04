@@ -37,9 +37,10 @@ img{
 
 <c:forEach var="emp" items="${list }">
 	<div>
-	<a href="getEmp?employee_id=${emp.employee_id }">${emp.first_name }</a>
+	<a href="getEmp?employee_id=${emp.employee_id }">${emp.first_name }</a><br>
 	<b>${emp.last_name } 부서 이름: ${emp.department_name } 직무: ${emp.job_title }</b><br>
 	</div>
+	<hr>
 </c:forEach>
 </body>
 </html>

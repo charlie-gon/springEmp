@@ -10,7 +10,7 @@
 <script>
 	$(function (){
 		$('#getBtn').on('click', function(){
-			location.href = "";
+			location.href = "getDept?manager_id=${dept.manager_id}";
 		});
 	});
 </script>

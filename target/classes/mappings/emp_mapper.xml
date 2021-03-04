@@ -5,19 +5,17 @@
 <mapper namespace="com.yedam.emp.service.impl.EmpMapper">
 	<select id="getSearchEmp" parameterType="emp" resultType="emp" >
 	<!-- https://gent.tistory.com/307 -->
-	SELECT 
-	E.EMPLOYEE_ID, 
-	E.FIRST_NAME,
-	E.LAST_NAME,
-	E.EMAIL,
-	E.HIRE_DATE,
-	D.DEPARTMENT_NAME, 
-	C.JOB_TITLE
-	FROM EMPLOYEES E
-	INNER JOIN DEPARTMENTS D
-	ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
-	INNER JOIN JOBS C
-	ON E.JOB_ID = C.JOB_ID
+		SELECT
+		E.EMPLOYEE_ID,
+		E.LAST_NAME,
+		E.EMAIL,
+		E.SALARY,
+		D.DEPARTMENT_ID,
+		D.DEPARTMENT_NAME,
+		J.JOB_TITLE
+		FROM EMPLOYEES E,DEPARTMENTS D, JOBS J 
+		WHERE E.DEPARTMENT_ID= D.DEPARTMENT_ID
+   		AND (E.JOB_ID = J.JOB_ID)
 		<!-- 참고: https://mybatis.org/mybatis-3/ko/dynamic-sql.html -->
 		<where>
 			<if test="department_id != null and department_id != ''">
