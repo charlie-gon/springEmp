@@ -28,7 +28,6 @@
 		WHERE BOARD_ID = #{board_id}
 	</select>
 
-
 	<insert id="insertComments" statementType="CALLABLE" parameterType="CommentsVO">
 	{call COMMENTS_INS(
 	#{content},
@@ -41,11 +40,19 @@
 	
 	<!-- foreach 참고자료: https://mybatis.org/mybatis-3/dynamic-sql.html -->
 	<delete id="deleteComments" parameterType="CommentsVO">
-		delete from comments
-		where id in
-		<foreach collection="ids" item="i" 
-			open="(" separator="," close=")">
-			#{i}
-		</foreach>
+		DELETE FROM COMMENTS
+		WHERE
+		<choose>
+			<when test="ids != null and ids.length > 0">
+				ID IN
+				<foreach collection="ids" item="i" 
+					open="(" separator="," close=")">
+					#{i}
+				</foreach>	
+			</when>
+			<otherwise>
+				ID = #{id}
+			</otherwise>		
+		</choose>
 	</delete>
 </mapper>

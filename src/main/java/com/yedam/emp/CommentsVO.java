@@ -13,8 +13,8 @@ public class CommentsVO {
 	private String name;
 	private String content;
 	private String board_id;
-	@JsonIgnore private String out_msg;
-	@JsonIgnore private String[] ids;
+	private String out_msg;
+	private String[] ids; // @JsonIgnore
 	@JsonFormat(pattern = "yyyyMMddHHmmss") // 교재 p.421
 	private Date wdate;
 }
