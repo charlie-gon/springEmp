@@ -31,7 +31,7 @@
 		<version>19.3.0.0</version>
 	</dependency>
 
-	<!-- 잭슨 -->
+	<!-- 잭슨 / json parsing 역할-->
 	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>

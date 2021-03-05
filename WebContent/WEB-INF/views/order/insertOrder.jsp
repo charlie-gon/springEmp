@@ -15,8 +15,6 @@
 				var plus_num = parseInt(trCnt)+1;
 				$('input').attr('name',plus_num);
 				$('input').attr('name','ords[].cnt');
-				
-			
 			
 		});
 		// 상품취소
