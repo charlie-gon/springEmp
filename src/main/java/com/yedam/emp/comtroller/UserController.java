@@ -52,9 +52,10 @@ public class UserController {
 	}
 	
 	// 삭제
-	@DeleteMapping(value = "/users")
-	public int deleteUser(UserVO vo) {
-		return userService.deleteUser(vo);
+	@DeleteMapping(value = "/users/{id}")
+	public Map deleteUser(UserVO vo, @PathVariable String id) {
+		int r = userService.deleteUser(vo);
+		return Collections.singletonMap("cnt", r);
 		
 	}
 	

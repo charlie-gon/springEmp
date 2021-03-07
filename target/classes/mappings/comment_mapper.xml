@@ -56,3 +56,14 @@
 		</choose>
 	</delete>
 </mapper>
+
+<!-- 
+MyBatis foreach문 지원 태그
+
+collection : 전달받은 인자. List or Array 형태만 가능
+item : 전달받은 인자 값을 alias 명으로 대체
+open : 구문이 시작될때 삽입할 문자열
+close : 구문이 종료될때 삽입할 문자열
+separator : 반복 되는 사이에 출력할 문자열
+index : 반복되는 구문 번호이다. 0부터 순차적으로 증가
+ -->
