@@ -39,11 +39,10 @@
 	
 	<update id="updateUser" parameterType="UserVO">
 		UPDATE USERS
-		
 		<set>
-			<if test="password != null and password !=''">
-				PASSWORD = #{password}
-			</if>
+		<if test="password != null and password !=''">password = #{password}</if>
+		<if test="name != null and name !=''">,name = #{name}</if>
+		<if test="role != null and role !=''">,role = #{role}</if>
 		</set>
 			WHERE ID = #{id}
 	</update>

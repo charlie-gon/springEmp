@@ -19,5 +19,13 @@ public interface UserService {
 	
 	// 수정
 	public int updateUser(UserVO vo);
+	
+	// 로그인
+	// int 타입으로 정의하면 다양한 로그인 처리 구현이 가능
+	// boolean 타입은 단순 로그인 처리마 가능
+	public boolean loginUser(UserVO vo);
+	
+	// 패스워드 변경
+	public int updatePwd(UserVO vo);
 
 }

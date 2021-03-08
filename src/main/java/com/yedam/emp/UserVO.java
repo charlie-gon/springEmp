@@ -10,4 +10,7 @@ public class UserVO {
 	private String password;
 	private String name;
 	private String role;
+	private String oldPwd; // 현재 패스워드
+	private String newPwd; // 변경 패스워드 확인
+	
 }

@@ -19,10 +19,12 @@
 
 	employee_id
 	<form:input path="employee_id" />
+	<form:errors path="employee_id" cssClass="error" />
 	<br> 
 
 	first_name
 	<form:input path="first_name" />
+	<form:errors path="first_name" cssClass="error" />
 	<br> 
 	
 	last_name
@@ -38,6 +40,7 @@
 	
 	hire_date
 	<form:input type="date" path="hire_date" />
+	<form:errors path="hire_date" cssClass="error" />
 	<br>
 	
 	job_id     

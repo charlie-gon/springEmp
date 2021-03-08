@@ -23,5 +23,16 @@
 	<mvc:annotation-driven />
 	
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
-
+	
+	<bean id="LoginInterceptor" class="com.yedam.emp.common.LoginInterceptor" />
+	
+	<!-- Interceptor -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/"/>
+			<ref bean="LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

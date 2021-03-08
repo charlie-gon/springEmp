@@ -1,6 +1,7 @@
 package com.yedam.emp.comtroller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,10 +52,10 @@ public class EmpController {
 	}
 	
 	@PostMapping("/insertEmp") // 등록 처리
-	public String insertEmpProc(EmpVO vo, BindingResult result, Model model, DeptSearchVO deptVo, JobVO jobVo) {
+	public String insertEmpProc(@Valid EmpVO vo, BindingResult result, Model model, DeptSearchVO deptVo, JobVO jobVo) {
 		// 입력값 검증(교재 p.438) // EmpValidation class와 연동
-		EmpValidation empValidation = new EmpValidation();
-		empValidation.validate(vo, result);
+		//EmpValidation empValidation = new EmpValidation();
+		//empValidation.validate(vo, result);
 		if(result.hasErrors()) { // 하나라도 에러가 있으면
 			model.addAttribute("deptList", deptService.getSearchDept(deptVo));
 			model.addAttribute("jobList", jobService.getSearchJob(jobVo));
