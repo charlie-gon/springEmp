@@ -46,5 +46,6 @@ public class EmpVO {
 	private String department_name;
 	private String job_title;
 	
-	
+// 데이터 검증 참고자료
+// https://parkwonhui.github.io/spring/2019/04/22/spring-valid-bindingresult.html
 }

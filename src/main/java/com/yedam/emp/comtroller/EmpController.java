@@ -65,6 +65,7 @@ public class EmpController {
 			return "redirect:getSearchEmp";
 		}
 	}
+	// 참고자료: https://parkwonhui.github.io/spring/2019/04/22/spring-valid-bindingresult.html
 	
 	@GetMapping("/updateEmp") // 수정 페이지 이동
 	public String updateEmp(EmpVO vo, Model model,DeptSearchVO deptVo, JobVO jobVo) {

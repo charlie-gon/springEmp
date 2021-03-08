@@ -2,14 +2,18 @@ package com.yedam.emp.comtroller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.yedam.emp.UserVO;
+import com.yedam.emp.UserValidation;
 import com.yedam.emp.service.UserService;
 
 @Controller
@@ -40,20 +44,22 @@ public class LoginController { // 로그인 확인
 	}
 	
 	@GetMapping("/changePwd") // 비밀번호 변경 페이지
-	public String changePwd() {
+	public String changePwd(UserVO vo, Model model) {
+		model.addAttribute("userVO", new UserVO());
 		return "user/changePwd";
 	}
 	
 	@PostMapping("/changePwd") // 비밀번호 변경 호출
-	public String changePwdProc(HttpSession session, UserVO vo, BindingResult result) {
-		// 일치 여부 확인
-		// 패스워드변경서비스
-		
-		
-		
-		String id = session.getAttribute("loginId").toString();
-		vo.setId(id);
-		userService.updatePwd(vo);
-		return "redirect:/";
+	public String changePwdProc(@Valid UserVO vo, HttpSession session,BindingResult result, Model model) {
+		// 입력값 검증(일치 여부 확인)
+		if(result.hasErrors()) {
+			return "user/changePwd";	
+		}else {
+			// 실행
+			String id = session.getAttribute("loginId").toString();
+			vo.setId(id);
+			userService.updatePwd(vo);
+			return "redirect:/";
+		}
 	}
 }
