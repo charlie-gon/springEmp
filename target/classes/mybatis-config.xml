@@ -14,9 +14,9 @@
  <setting name="mapUnderscoreToCamelCase" value="false"/>
  </settings>
 <typeAliases>
- 	<typeAlias type="com.yedam.emp.EmpVO" alias="emp"/>
- 	<typeAlias type="com.yedam.emp.DeptVO" alias="dept"/>
- 	<typeAlias type="com.yedam.emp.JobVO" alias="job"/>
+ 	<typeAlias type="com.yedam.emp.EmpVO" alias="emp" />
+ 	<typeAlias type="com.yedam.emp.DeptVO" alias="dept" />
+ 	<typeAlias type="com.yedam.emp.JobVO" alias="job" />
  	<package name="com.yedam"/>
 </typeAliases>
 </configuration>

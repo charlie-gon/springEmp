@@ -3,11 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>insertEmp.jsp</title>
+<style>
+.error{color:red}
+</style>
 </head>
 <body>
 <h3>사원 등록</h3>
@@ -23,12 +27,13 @@
 	
 	last_name
 	<form:input path="last_name" />
+	<form:errors path="last_name" cssClass="error" />
 	<br> 
 	
 	email
 	<form:input path="email" />
 	<button type="button" id="btnEmail">중복체크</button>
-	<span id="emailResult"></span>
+	<form:errors path="email" cssClass="error" />
 	<br> 
 	
 	hire_date

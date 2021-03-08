@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yedam.emp.UserVO;
 import com.yedam.emp.service.UserService;
 
@@ -37,9 +40,15 @@ public class UserController {
 	// 등록
 	// RequestBody = JSON 활용하여 호출
 	@PostMapping("/insertUser")
-	public UserVO insertUser(UserVO vo) {
+	public ResponseEntity<Object> insertUser(UserVO vo) throws JsonProcessingException {
 		userService.insertUser(vo);
-		return userService.getUser(vo);
+		UserVO userVO = userService.getUser(vo);
+		if(userVO != null) {
+			ObjectMapper mapper = new ObjectMapper(); // jackson 라이브러리에서 json 변환을 돕는 역할
+			return ResponseEntity.status(200).body(mapper.writeValueAsString(userVO));
+		}else {
+			return ResponseEntity.status(500).body("insert error"); // userService.getUser(vo);
+		}
 	}
 	
 	// 수정
