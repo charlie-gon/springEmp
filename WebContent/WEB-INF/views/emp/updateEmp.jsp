@@ -68,11 +68,11 @@
 	job_id     
 	<form:select path="job_id">
 		<option value="">선택</option>
-		<form:options items="${jobList }" itemLabel="job_title" itemValue="job_id"/>
+		<form:options items="${jobList}" itemLabel="job_title" itemValue="job_id"/>
 	</form:select><br>
 	
 	department_id
-	<form:radiobuttons items="${deptList }" path="department_id" itemLabel="department_name" itemValue="department_id"/>
+	<form:radiobuttons items="${deptList}" path="department_id" itemLabel="department_name" itemValue="department_id"/>
 	
 	<button type="submit">등록</button>
 </form:form>

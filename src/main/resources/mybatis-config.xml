@@ -13,10 +13,10 @@
  <!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
  <setting name="mapUnderscoreToCamelCase" value="false"/>
  </settings>
- <typeAliases>
+<typeAliases>
  	<typeAlias type="com.yedam.emp.EmpVO" alias="emp"/>
  	<typeAlias type="com.yedam.emp.DeptVO" alias="dept"/>
  	<typeAlias type="com.yedam.emp.JobVO" alias="job"/>
  	<package name="com.yedam"/>
- </typeAliases>
- </configuration>
+</typeAliases>
+</configuration>

@@ -55,8 +55,10 @@ public class EmpController {
 	}
 	
 	@GetMapping("/updateEmp") // 수정 페이지 이동
-	public String updateEmp(EmpVO vo, Model model) {
+	public String updateEmp(EmpVO vo, Model model,DeptSearchVO deptVo, JobVO jobVo) {
 		model.addAttribute("empVo", empService.getEmp(vo));
+		model.addAttribute("deptList", deptService.getSearchDept(deptVo));
+		model.addAttribute("jobList", jobService.getSearchJob(jobVo));
 		return "/emp/updateEmp";
 	}
 	

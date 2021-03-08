@@ -19,40 +19,41 @@ import com.yedam.emp.UserVO;
 import com.yedam.emp.service.UserService;
 
 @RestController
-public class UserController {
+public class RestfulUserController {
 	
 	@Autowired UserService userService;
 	
 	// 조회
-	@GetMapping("/getUserList")
+	@GetMapping("/users")
 	public List<UserVO> getSearchUser(UserVO vo) {
 		return userService.getSearchUser(vo);
 	}
 	// 단건 조회
-	@GetMapping("/getUser")
-	public UserVO getUser(UserVO vo) {
+	@GetMapping("/users/{id}")
+	public UserVO getUser(UserVO vo, @PathVariable String id) {
+		vo.setId(id);
 		return userService.getUser(vo);
 	}
 	
 	// 등록
 	// RequestBody = JSON 활용하여 호출
-	@PostMapping("/insertUser")
-	public UserVO insertUser(UserVO vo) {
+	@PostMapping("/users")
+	public UserVO insertUser(@RequestBody UserVO vo) {
 		userService.insertUser(vo);
 		return userService.getUser(vo);
 	}
 	
 	// 수정
 	// RequestBody = JSON 활용하여 호출
-	@PostMapping("/updateUser")
-	public UserVO updateUser(UserVO vo) {
+	@PutMapping("/users")
+	public UserVO updateUser(@RequestBody UserVO vo) {
 		userService.updateUser(vo);
 		return userService.getUser(vo);
 	}
 	
 	// 삭제
-	@GetMapping(value = "deleteUser")
-	public Map deleteUser(UserVO vo) {
+	@DeleteMapping(value = "/users/{id}")
+	public Map deleteUser(UserVO vo, @PathVariable String id) {
 		int r = userService.deleteUser(vo);
 		return Collections.singletonMap("cnt", r);
 		

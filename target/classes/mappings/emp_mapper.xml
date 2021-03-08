@@ -66,7 +66,9 @@
 		UPDATE 
 		EMPLOYEES 
 		SET 
-		<if test="email != null">EMAIL = #{email}</if> 
+		<if test="email != null">
+		EMAIL = #{email}
+		</if> 
 		WHERE EMPLOYEE_ID = #{employee_id}
 	</update>
 	<delete id="deleteEmp" parameterType="emp">

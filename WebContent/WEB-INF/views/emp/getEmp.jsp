@@ -35,7 +35,7 @@ ${empVO }
 
 <a href="getSearchEmp">목록으로 이동</a><br>
 <a href="deleteEmp?employee_id=${emp.employee_id }">삭제</a><br>
-<button id="btnUpd">수정</button>
+<button type="button" id="btnUpd">수정</button>
 </div>
 </body>
 </html>

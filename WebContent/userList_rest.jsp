@@ -38,21 +38,26 @@
 	function userDelete() {
 		//삭제 버튼 클릭
 		$('body').on('click','#btnDelete',function(){
+			if(!confirm('삭제할까요?')){
+				return;
+			}
+			
+			var tr = $(this).closest('tr');
 			var userId = $(this).closest('tr').find('#hidden_userId').val();
-			var result = confirm("정말 삭제하시겠습니까?");
 			if(result){
 				$.ajax({
 					url: 'users/'+userId,
 					type: 'DELETE',
-					contentType: 'application/json;charset=utf-8',
 					dataType: 'json',
 					error:function(xhr,status,msg){
 						console.log("상태값: " + status + "Http에러메시지: " + msg);
-					}, success:function(xhr){
-						console.log(xhr.result);
-						userList();
+					}, success:function(response){
+						if(response.cnt == 1){
+							tr.remove();
+						}else{
+							alert('삭제오류');
+						}					
 					}
-					
 				});
 			}
 		}); //삭제 버튼 클릭
@@ -90,23 +95,19 @@
 	function userUpdate() {
 		//수정 버튼 클릭
 		$('#btnUpdate').on('click',function(){
-			var id = $('input:text[name="id"]').val();
-			var name = $('input:text[name="name"]').val();
-			var password = $('input:text[name="password"]').val();
-			var role = $('input:text[name="role"]').val();
 			$.ajax({
-				url: "users",
-				type: 'POST',
+				url: 'users',
+				method: 'PUT',
+				data: JSON.stringify($("#form1").serializeObject()),
+				contentType: 'application/json', // 보내는 data 타입에 맞는 contentType 설정(json)
 				dataType: 'json',
-				data: JSON.stringify($('#form1').serializeObject()),
-				contentType: 'application/json',
-				success:function(response){
-					if(response.result == true){
-						userList();
-					}
-				},
-				error:function(xhr,status,msg){
-					alert("상태값: "+status+" Http에러메시지: "+msg);
+				success: function(response){
+					//폼필드 초기화
+					document.form1.reset();
+					//기존 tr태그를 -> 수정된 데이터로 교체던지 or 전체조회
+					var tr = makeTr(response);
+					var oldTr = $("td:contains('"+response.id+"')").parent(); // 기존 tr태그
+					oldTr.replaceWith(tr);
 				}
 			});
 
@@ -148,25 +149,30 @@
 	}//userList
 	
 	//사용자 목록 조회 응답
+	function makeTr(item){
+		return $('<tr>')
+		.append($('<td>').html(item.id))
+		.append($('<td>').html(item.name))
+		.append($('<td>').html(item.password))
+		.append($('<td>').html(item.role))
+		.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
+		.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
+		.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
+	}
+	
 	function userListResult(data) {
 		$("tbody").empty();
 		$.each(data,function(idx,item){
-			$('<tr>')
-			.append($('<td>').html(item.id))
-			.append($('<td>').html(item.name))
-			.append($('<td>').html(item.password))
-			.append($('<td>').html(item.role))
-			.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
-			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
-			.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
-			.appendTo('tbody');
+			var tr = makeTr(item);
+			tr.appendTo('tbody');
 		});//each
 	}//userListResult
+	
 </script>
 </head>
 <body>
 <div class="container">
-	<form id="form1"  class="form-horizontal">
+	<form id="form1" name="form1" class="form-horizontal">
 		<h2>사용자 등록 및 수정</h2>
 		<div class="form-group">		
 			<label >아이디:</label>
