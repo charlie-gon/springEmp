@@ -57,6 +57,12 @@ public class RestfulUserController {
 		int r = userService.deleteUser(vo);
 		return Collections.singletonMap("cnt", r);
 		
+		/*
+		 *  singletonMap 
+		 *  - immutable map(불변의 맵) 데이터 리턴(변경 불가, 읽기 전용, null 허용 X)
+		 *  - 지정된 값으로 지정된 객체만 매핑하는 맵 리턴(Serializable)
+		 */
+		
 	}
 	
 }

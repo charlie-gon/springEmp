@@ -48,7 +48,7 @@
 				$.ajax({
 					url: 'users/'+userId,
 					type: 'DELETE',
-					dataType: 'json',
+					dataType: 'json', // 서버로부터 다시 받을 데이터 타입
 					error:function(xhr,status,msg){
 						console.log("상태값: " + status + "Http에러메시지: " + msg);
 					}, success:function(response){
@@ -126,6 +126,10 @@
 				url: "users",
 				method: "post", 
 				data: JSON.stringify($("#form1").serializeObject()),
+				// JSON.stringify: JavaScript Object를 JSON string으로 변환
+				// 참고 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+				// JSON.stringify().serializeObject() = JSON으로 생성된 객체를 String으로 보여주겠다.
+				
 				contentType: 'application/json', // 보낼 데이터가 json이라는 것을 알려주는 역할 -> @RequestBody
 				dataType: "json", // 응답 결과가 json == json.parse
 				success: function(response){

@@ -42,7 +42,7 @@ public class EmpMapperClient {
 					.hire_date(new java.sql.Date(new Date().getTime()))
 					.job_id("IT_PROG")
 					.build();
-		int result = empService.insertEmp(vo);
+		int result = empMapper.insertEmp(vo);
 		assertEquals(result, 1);
 	}
 	

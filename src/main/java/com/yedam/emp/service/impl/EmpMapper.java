@@ -19,7 +19,7 @@ public interface EmpMapper {
 	public EmpVO getEmp(EmpVO vo);
 
 	// 전체&검색 조회
-	public List<EmpVO> getSearchEmp(EmpSearchVO vo);
+	public List<EmpVO> getSearchEmp(EmpVO vo);
 	
 	// 건수
 	public int getCount(EmpSearchVO vo);
